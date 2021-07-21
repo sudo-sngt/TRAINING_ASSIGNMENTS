@@ -1,0 +1,285 @@
+> show dbs
+admin   0.000GB
+config  0.000GB
+dbName  0.000GB
+demo    0.000GB
+local   0.000GB
+> use dbName
+switched to db dbName
+> db
+dbName
+> db.dropDatabase()
+{ "dropped" : "dbName", "ok" : 1 }
+> show collections
+> db.createCollection('comments')
+{ "ok" : 1 }
+> db.comments.find()
+> db.createCollection('comments')
+{
+        "ok" : 0,
+        "errmsg" : "Collection already exists. NS: dbName.comments",
+        "code" : 48,
+        "codeName" : "NamespaceExists"
+}
+> db.comments.insert({
+...     'name': 'Harry',
+...     'lang': 'JavaScript',
+...     'member_since': 5
+...  })
+WriteResult({ "nInserted" : 1 })
+> db.comments.findOne({name: 'Harry'})
+{
+        "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+> Insert many Rows:-
+... db.comments.insertMany([{
+...     'name': 'Harry',
+...     'lang': 'JavaScript',
+...     'member_since': 5
+...     },
+...     {'name': 'Rohan',
+...     'lang': 'Python',
+...     'member_since': 3
+...     },
+...     {'name': 'Lovish',
+...     'lang': 'Java',
+...     'member_since': 4
+... }])
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:7
+> db.comments.insertMany([{
+...     'name': 'Harry',
+...     'lang': 'JavaScript',
+...     'member_since': 5
+...     },
+...     {'name': 'Rohan',
+...     'lang': 'Python',
+...     'member_since': 3
+...     },
+...     {'name': 'Lovish',
+...     'lang': 'Java',
+...     'member_since': 4
+... }])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("60f11d4f7d53cc62fb2e6195"),
+                ObjectId("60f11d4f7d53cc62fb2e6196"),
+                ObjectId("60f11d4f7d53cc62fb2e6197")
+        ]
+}
+> db.comments.find()
+{ "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"), "name" : "Harry", "lang" : "JavaScript", "member_since" : 5 }
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6195"), "name" : "Harry", "lang" : "JavaScript", "member_since" : 5 }
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"), "name" : "Rohan", "lang" : "Python", "member_since" : 3 }
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"), "name" : "Lovish", "lang" : "Java", "member_since" : 4 }
+> db.comments.find().pretty()
+{
+        "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6195"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"),
+        "name" : "Rohan",
+        "lang" : "Python",
+        "member_since" : 3
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"),
+        "name" : "Lovish",
+        "lang" : "Java",
+        "member_since" : 4
+}
+> db.comments.findOne({name: 'Harry'})
+{
+        "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+> db.comments.find({lang:'Python'})
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"), "name" : "Rohan", "lang" : "Python", "member_since" : 3 }
+> db.comments.find().limit(2)
+{ "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"), "name" : "Harry", "lang" : "JavaScript", "member_since" : 5 }
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6195"), "name" : "Harry", "lang" : "JavaScript", "member_since" : 5 }
+> db.comments.find().count()
+4
+> db.comments.find().limit(3).count()
+4
+> db.comments.update({name: 'Shubham'},
+... {'name': 'Harry',
+...     'lang': 'JavaScript',
+...     'member_since': 51
+... }, {upsert: true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("60f11fcc872acfed122f88ef")
+})
+> db.comments.find().pretty()
+{
+        "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6195"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"),
+        "name" : "Rohan",
+        "lang" : "Python",
+        "member_since" : 3
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"),
+        "name" : "Lovish",
+        "lang" : "Java",
+        "member_since" : 4
+}
+{
+        "_id" : ObjectId("60f11fcc872acfed122f88ef"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 51
+}
+> db.comments.update({name: 'Shubham'},
+... {'name': 'Harry',
+...     'lang': 'JavaScript',
+...     'member_since': 51
+... }, {upsert: true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("60f12054872acfed122f88f8")
+})
+> db.comments.update({name: 'Rohan'},
+... {$inc:{
+...     member_since: 2
+... }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.comments.find().pretty()
+{
+        "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6195"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"),
+        "name" : "Rohan",
+        "lang" : "Python",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"),
+        "name" : "Lovish",
+        "lang" : "Java",
+        "member_since" : 4
+}
+{
+        "_id" : ObjectId("60f11fcc872acfed122f88ef"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 51
+}
+{
+        "_id" : ObjectId("60f12054872acfed122f88f8"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 51
+}
+> db.comments.update({name: 'Rohan'},
+... {$rename:{
+...     member_since: 'member'
+... }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+>
+> db.comments.update({name: 'Rohan'},
+... {$rename:{
+...     member_since: 'member'
+... }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.comments.find().pretty()
+{
+        "_id" : ObjectId("60f11cfb7d53cc62fb2e6194"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6195"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"),
+        "name" : "Rohan",
+        "lang" : "Python",
+        "member" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"),
+        "name" : "Lovish",
+        "lang" : "Java",
+        "member_since" : 4
+}
+{
+        "_id" : ObjectId("60f11fcc872acfed122f88ef"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 51
+}
+{
+        "_id" : ObjectId("60f12054872acfed122f88f8"),
+        "name" : "Harry",
+        "lang" : "JavaScript",
+        "member_since" : 51
+}
+> db.comments.remove({name: 'Harry'})
+WriteResult({ "nRemoved" : 4 })
+> db.comments.find().pretty()
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6196"),
+        "name" : "Rohan",
+        "lang" : "Python",
+        "member" : 5
+}
+{
+        "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"),
+        "name" : "Lovish",
+        "lang" : "Java",
+        "member_since" : 4
+}
+> db.comments.find({member_since: {$lt: 90}})
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"), "name" : "Lovish", "lang" : "Java", "member_since" : 4 }
+> db.comments.find({member_since: {$lte: 90}})
+{ "_id" : ObjectId("60f11d4f7d53cc62fb2e6197"), "name" : "Lovish", "lang" : "Java", "member_since" : 4 }
+> db.comments.find({member_since: {$gte: 90}})
+>
+
+
