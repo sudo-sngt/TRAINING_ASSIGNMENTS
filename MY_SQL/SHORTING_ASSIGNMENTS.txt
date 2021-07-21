@@ -1,0 +1,122 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.25 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database shortingExample
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use shortingExample
+Database changed
+mysql> CREATE TABLE CUSTOMERS
+    -> (
+    -> ID INT,
+    -> NAME VARCHAR(30),
+    -> AGE INT,
+    -> ADDRESS VARCHAR(30),
+    -> SALARY VARCHAR (30)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO CUSTOMERS('1', 'SANJEET', '22', 'GOPAL GANJ', '25000');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1', 'SANJEET', '22', 'GOPAL GANJ', '25000')' at line 1
+mysql> INSERT INTO CUSTOMERS VALUES(1, 'SANJEET', 22, 'GOPAL GANJ', 25000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(2, 'MANJEET', 23, 'SIWAN', 18000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(3, 'RANJEET', 24, 'AHEMEDABAD', 19000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(4, 'SANJEEV', 24, 'GUJARAT', 30000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(5, 'SANDEEP', 27, 'GUJARAT', 10000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(6, 'SUNNY', 23,'DELHI', 17000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMERS;
++------+---------+------+------------+--------+
+| ID   | NAME    | AGE  | ADDRESS    | SALARY |
++------+---------+------+------------+--------+
+|    1 | SANJEET |   22 | GOPAL GANJ | 25000  |
+|    2 | MANJEET |   23 | SIWAN      | 18000  |
+|    3 | RANJEET |   24 | AHEMEDABAD | 19000  |
+|    4 | SANJEEV |   24 | GUJARAT    | 30000  |
+|    5 | SANDEEP |   27 | GUJARAT    | 10000  |
+|    6 | SUNNY   |   23 | DELHI      | 17000  |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM CUSTOMERS
+    ->    ORDER BY NAME, SALARY;
++------+---------+------+------------+--------+
+| ID   | NAME    | AGE  | ADDRESS    | SALARY |
++------+---------+------+------------+--------+
+|    2 | MANJEET |   23 | SIWAN      | 18000  |
+|    3 | RANJEET |   24 | AHEMEDABAD | 19000  |
+|    5 | SANDEEP |   27 | GUJARAT    | 10000  |
+|    1 | SANJEET |   22 | GOPAL GANJ | 25000  |
+|    4 | SANJEEV |   24 | GUJARAT    | 30000  |
+|    6 | SUNNY   |   23 | DELHI      | 17000  |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM CUSTOMERS
+    ->    ORDER BY NAME DESC;
++------+---------+------+------------+--------+
+| ID   | NAME    | AGE  | ADDRESS    | SALARY |
++------+---------+------+------------+--------+
+|    6 | SUNNY   |   23 | DELHI      | 17000  |
+|    4 | SANJEEV |   24 | GUJARAT    | 30000  |
+|    1 | SANJEET |   22 | GOPAL GANJ | 25000  |
+|    5 | SANDEEP |   27 | GUJARAT    | 10000  |
+|    3 | RANJEET |   24 | AHEMEDABAD | 19000  |
+|    2 | MANJEET |   23 | SIWAN      | 18000  |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMERS
+    -> ORDER BY(CASR ADDRESS
+    -> WHEN 'GUJARAT' THEN 1
+    -> WHEN 'DELHI' THEN 2
+    -> WHEN 'SIWAN' THEN 3
+    -> WHEN AHEMEDABAD THEN 4
+    -> ELSE 100 END)ASC, ADDRESS DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ADDRESS
+WHEN 'GUJARAT' THEN 1
+WHEN 'DELHI' THEN 2
+WHEN 'SIWAN' THEN 3
+WHEN AHEME' at line 2
+mysql> SELECT *FROM CUSTOMERS
+    -> ORDER BY(CASE ADDRESS
+    -> WHEN 'GUJARAT' THEN 1
+    -> WHEN 'DELHI' THEN 2
+    -> WHEN 'SIWAN' THEN 3
+    -> WHEN 'AHEMEDABAD' THEN 4
+    -> ELSE 100 END)ASC, ADDRESS DESC;
++------+---------+------+------------+--------+
+| ID   | NAME    | AGE  | ADDRESS    | SALARY |
++------+---------+------+------------+--------+
+|    4 | SANJEEV |   24 | GUJARAT    | 30000  |
+|    5 | SANDEEP |   27 | GUJARAT    | 10000  |
+|    6 | SUNNY   |   23 | DELHI      | 17000  |
+|    2 | MANJEET |   23 | SIWAN      | 18000  |
+|    3 | RANJEET |   24 | AHEMEDABAD | 19000  |
+|    1 | SANJEET |   22 | GOPAL GANJ | 25000  |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql>
