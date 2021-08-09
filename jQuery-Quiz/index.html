@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+   <div>
+        <div class="main-div">
+            <!-- <h1>Quiz Time</h1> -->
+        <button id="start" class="strt"> Start Quiz </button>
+        <div class="inner-div">
+            <h2 class="questions">Questions comes here</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="ans1" class="answer">
+                    <label for="ans1" id="option1">Answer Option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans2" class="answer">
+                    <label for="ans2" id="option2">Answer Option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans3" class="answer">
+                    <label for="ans3" id="option3">Answer Option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans4" class="answer">
+                    <label for="ans4" id="option4">Answer Option</label>
+                </li>
+            </ul>
+            <button id="next" class="button"> Next Question </button>
+            <script>
+                $("#next").hide();
+
+                $(".answer").click(function(){
+                   $("#next").show().click(function(){
+                    $("#next").hide();
+                   });
+               })
+           </script>
+
+           <script>
+               $("#ans1").click(function(){
+                   $("#next").show();
+               }) 
+           </script>
+       
+            <div id="showScore" class="scoreArea"</div>
+
+
+        </div>
+        <script>
+            $(".inner-div").hide();
+        </script>
+
+        <script>
+            $("#start").click(function(){
+                $(".inner-div").show();
+                $(this).hide();  
+            })
+        </script>
+    </div>
+
+   </div>
+    
+    <script src="script.js"></script>
+
+   
+
+</body>
+</html> 
