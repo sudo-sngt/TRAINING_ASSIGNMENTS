@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>E-Cart</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand " href="#"><b>E-cart</b></a>
+  </nav>
+
+
+  <div>
+    
+
+    <div class="container col-md-8 my-4 bg-success border border-dark rounded-sm text-center ">
+
+      <div class="section-title text-center mb-3">
+        <h2>Add Product</h2>
+      </div>
+    
+      <div class="form-group">
+        <label>
+         <strong>Product Name:</strong>
+          <br><input id="name" type="text" placeholder="Enter Product Name" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>
+           <strong>Product Description</strong>
+          <br><textarea type="textarea" style="resize:none" rows=5 cols=50 maxlength=250 onkeydown="return" required id="details" name="details"
+            placeholder="Enter Product Description"> </textarea>
+          
+        </label>
+      </div>
+      <div class="form-group btn btn-info">
+        <label for="file" style="cursor: pointer;"><strong>Upload Image</strong></label>
+        <br><input accept="image/*" type="file" id="file" name="file" 
+          style="display: none;" required></input>
+  
+      </div>
+      <div class="form-group">
+        <label>
+          <strong>Product Quantity:</strong>
+          <br><input id="quantity" type="number" id="quantity" name="quantity" step="1" min="0"
+            placeholder="Item Quantity" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>
+          <strong>Product Price:</strong>
+          <br><input id="price" type="number" name="price" step="1" min="0" placeholder="Item Price">
+        </label>
+      </div>
+  
+  
+      <button id="add" class="btn btn-info text-dark"><strong>Add to list</strong></button>
+      <button id="clear" class="btn btn-danger text-dark" onclick="clearStorage()"><strong>Clear list</strong></button>
+
+
+  
+    
+    <!--------------------------------------- ADD_NEW_PRODUCT PAGE CODE -------------------------------------->
+    <pre>
+    </pre>
+
+    <div class="main_area border table-bordered bg-success  solid black">
+      <div>
+        <div>
+          <div>
+            <div class="section-title text-center mb-3">
+              <h2>Product List</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row " id="output"></div>
+
+          <table class="table text-center table-striped table-hover">
+            <tr>
+              <th>Product Image</th>
+              <th>Name</th>
+              <th>Detail</th>
+              
+              <th>Quanity</th>
+              <th>Price</th>
+              <th>Add to Cart</th>
+            </tr>
+          
+            <tbody id="productble">
+
+            </tbody>
+          </table>
+          
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12 bg-success">
+            <div class="section-title text-center mb-3">
+              <h2>Cart List</h2>
+            </div>
+            <div id="cart_show" class="cart text-center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
