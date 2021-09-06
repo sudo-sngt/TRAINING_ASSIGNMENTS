@@ -1,0 +1,13 @@
+.cart-section{
+    padding: 40px 0;
+
+}
+
+table, th, td {
+    border:1px solid black;
+  }
+
+  img{
+      width: 100px;
+      height: 100px;
+  }

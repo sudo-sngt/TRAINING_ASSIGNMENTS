@@ -1,0 +1,14 @@
+<div class="container">
+    <h1 class="text-center mb-3">E-Cart-Sanjeet</h1>
+    <app-add-product (productAdd)="addProduct($event)"></app-add-product>
+    <h4>Your Products</h4>
+    <div *ngIf="this.products.length===0; else elseBlock ">No Product to display</div>
+    <ng-template #elseBlock>
+        <div *ngFor="let product of products; index as i">
+            <app-product-item [product]="product" [i]="i" (productDelete)="deleteProduct($event)"></app-product-item>
+        </div>
+    </ng-template>
+</div> 
+
+
+

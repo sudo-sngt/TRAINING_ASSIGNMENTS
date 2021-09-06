@@ -1,0 +1,45 @@
+<section class="cart-section">
+
+    <div class="container">
+     <h2>Cart</h2>
+     <div *ngIf="getCartDetails">
+ 
+     <table style="width:100%">
+       <tr>
+         <th>Image</th>
+         <th>Name</th>
+         <th>Price</th>
+         <th>Description</th>
+         <th>Quantity</th>
+         <th>Sub total</th>
+         <th>Remove Item</th>
+ 
+       </tr>
+       <tr *ngFor="let getCartDetail of getCartDetails">
+         <td><img src="{{getCartDetail.img}}"></td>
+         <td>{{getCartDetail.name}}</td>
+         <td>{{getCartDetail.price}}</td>
+         <td>{{getCartDetail.desc}}</td>
+        
+         <td><div class="content">
+             <button type="button" class="btn" (click)="incQnt(getCartDetail.productId, getCartDetail.quantity)"><i class="fa fa-plus">+</i></button>
+             <span> <td>{{getCartDetail.quantity}}</td></span>
+             <button type="button" class="btn" (click)="decQnt(getCartDetail.productId, getCartDetail.quantity)"><i class="fa fa-minus">-</i></button>
+             <p class="card-text"></p>
+           </div></td>
+         <td>{{getCartDetail.quantity * getCartDetail.price | number }}</td>
+         <td><button class="rmitem" (click)="singleDelete(getCartDetail.productId)">removeItem</button></td>
+         
+       </tr>
+       <td>{{grandTotal}}</td>
+       <div>
+         <button class="rmAll" (click)="removeAll()">removeAllItem</button>
+       </div>
+ 
+     </table>
+   </div>
+ 
+    </div> 
+ 
+ </section>
+ 

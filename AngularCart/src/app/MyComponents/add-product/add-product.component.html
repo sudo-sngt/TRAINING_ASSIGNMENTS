@@ -1,0 +1,42 @@
+<div class="my-3">
+    <h4>Add New Product</h4>
+    <form (ngSubmit)="onSubmit()" style="border: 5px solid #1b0679; padding: 10px;">
+    
+      <div class="form-group">
+        <label for="productId">Product Id</label>
+        <input type="number" [(ngModel)]="productId" class="form-control" id="productId" name="productId" aria-describedby="emailHelp"> 
+      </div>
+    
+        <div class="form-group">
+          <label for="name">Product Name</label>
+          <input type="text" [(ngModel)]="name" class="form-control" id="name" name="name" aria-describedby="emailHelp"> 
+        </div>
+        <br>
+    
+        
+        <div class="form-group btn btn-info">
+          <label accept="../../../assets" for="img" style="cursor: pointer;"><strong>Upload Image</strong></label>
+          <br><input  type="file" id="img" name="img"  [(ngModel)]="img"
+            style="display: none;"  onChange= "upload(this.value[0])">
+        </div>
+        <br>
+    
+        <div class="form-group">
+          <label for="desc"> Description</label>
+          <input type="text" class="form-control" name="desc" id="desc" [(ngModel)]="desc">
+        </div> 
+    
+        <div class="form-group">
+          <label for="name">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="quantity" [(ngModel)]="quantity">
+        </div> 
+    
+        <div class="form-group">
+          <label for="name">Price</label>
+          <input type="number" class="form-control" name="price" id="price" [(ngModel)]="price">
+        </div> 
+    
+        
+    <br>
+        <button type="submit" class="btn btn-sm btn-primary">Add Product</button>
+      </form></div>
